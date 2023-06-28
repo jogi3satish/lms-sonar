@@ -36,6 +36,12 @@ stage('Deploy LMS') {
                     echo "${packageJSONVersion}"  
                     sh "curl -u admin:Mounikas@tish1706 -X GET \'http://13.200.8.16:8081/repository/lms/dist-${packageJSONVersion}.zip\' --output dist-'${packageJSONVersion}'.zip"
                     sh "sudo unzip -o dist-'${packageJSONVersion}'.zip"
+                    sh "sudo mkdir var"
+                    sh "cd var"
+                    sh "sudo mkdir www"
+                    sh "cd www"
+                    sh "sudo mkdir html"
+                    sh "cd html"
                     sh "sudo cp -r webapp/dist/* /var/www/html"
             }
             }
