@@ -23,7 +23,7 @@ stage('Release LMS') {
                     def packageJSONVersion = packageJSON.version
                     echo "${packageJSONVersion}"  
                     sh "zip webapp/dist-${packageJSONVersion}.zip -r webapp/dist"
-                    sh "curl -v -u admin:Sonis@tish2357 --upload-file webapp/dist-${packageJSONVersion}.zip http://65.0.68.70:8081/repository/lms/"     
+                    sh "curl -v -u admin:Sonis@tish2357 --upload-file webapp/dist-${packageJSONVersion}.zip http://65.0.68.70:8081/repository/lmsapp/"     
             }
             }
         }
@@ -34,7 +34,7 @@ stage('Deploy LMS') {
                     def packageJSON = readJSON file: 'webapp/package.json'
                     def packageJSONVersion = packageJSON.version
                     echo "${packageJSONVersion}"  
-                    sh "curl -u admin:Sonis@tish2357 -X GET \'http://65.0.68.70:8081//repository/lms/dist-${packageJSONVersion}.zip\' --output dist-'${packageJSONVersion}'.zip"
+                    sh "curl -u admin:Sonis@tish2357 -X GET \'http://65.0.68.70:8081//repository/lmsapp/dist-${packageJSONVersion}.zip\' --output dist-'${packageJSONVersion}'.zip"
                     sh 'sudo rm -rf /var/www/html/*'
                     sh "sudo unzip -o dist-'${packageJSONVersion}'.zip"
                     sh "sudo cp -r webapp/dist/* /var/www/html"
